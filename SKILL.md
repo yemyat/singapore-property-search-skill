@@ -1,6 +1,7 @@
 ---
 name: singapore-property-search
 description: Search Singapore properties on 99.co and PropertyGuru. Use when the user asks to find condos, HDBs, or landed properties for rent or sale in Singapore, filter by MRT, district, price, or size.
+compatibility: Requires bun runtime and internet access to 99.co and propertyguru.com.sg. Optional agent-browser skill for fallback.
 ---
 
 # Singapore Property Search
