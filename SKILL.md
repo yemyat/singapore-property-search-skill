@@ -66,6 +66,36 @@ const params = new URLSearchParams({
 
 Common MRT IDs: `sg-mrt-orchard`, `sg-mrt-newton`, `sg-mrt-stevens`, `sg-mrt-bugis`, `sg-mrt-city-hall`
 
+### Discovering Location IDs
+
+**Don't hardcode IDs** - use the autocomplete API to discover valid zone IDs, MRT IDs, and coordinates:
+
+```typescript
+const res = await fetch(
+  "https://www.99.co/api/v2/web/autocomplete/location?" +
+    new URLSearchParams({
+      input: "bukit panjang", // Search query
+      listing_type: "rent",
+      property_segments: "residential",
+      include_mrts: "true",
+    }),
+  { headers: { Accept: "application/json" } }
+);
+
+const data = await res.json();
+// data.data.sections[].locations[] contains:
+// - id: "zobukit_panjang" or "sg-mrt-bukit-panjang"
+// - type: "zone" or "subway_station"
+// - title: "Bukit Panjang"
+// - coordinates: { lat: 1.379..., lng: 103.764... }
+```
+
+Use these values in your search:
+- `id` → `query_ids`
+- `type` → `query_type`
+- `title` → `query_name`
+- `coordinates` → `query_coords` (format: `lat,lng`)
+
 ### By Zone/Area
 
 ```typescript
