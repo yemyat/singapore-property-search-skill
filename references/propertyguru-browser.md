@@ -2,7 +2,27 @@
 
 Guide for navigating PropertyGuru using agent-browser when direct fetch fails.
 
-## When to Use
+## Cloudflare Bypass (No Browser)
+
+**Try direct fetch first** - PropertyGuru can be bypassed without a browser:
+
+| Method | How | Browser Needed |
+|--------|-----|----------------|
+| Mobile User-Agent | iOS/Android Safari UA string | No |
+| Autocomplete subdomain | `autocomplete.propertyguru.com` (no protection) | No |
+| Browser context | Puppeteer/Playwright, extract `__NEXT_DATA__` | Yes |
+
+```typescript
+// PropertyGuru - works without browser
+fetch(url, {
+  headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15" },
+  redirect: "follow"
+})
+```
+
+**Key insight**: Specific header = bypass. Mobile User-Agent required, minimal headers get blocked.
+
+## When to Use Browser
 
 Use browser navigation when:
 - Mobile User-Agent bypass stops working

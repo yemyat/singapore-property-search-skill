@@ -2,7 +2,24 @@
 
 Guide for navigating 99.co using agent-browser when direct API fetch fails.
 
-## When to Use
+## Cloudflare Bypass (No Browser)
+
+**Try direct fetch first** - 99.co can be bypassed without a browser:
+
+| Method | How | Browser Needed |
+|--------|-----|----------------|
+| Minimal headers | `Accept: application/json` header only | No |
+| Avoid browser-like headers | No User-Agent, Referer, sec-fetch-* | No |
+| Browser context | Puppeteer/Playwright with `page.evaluate()` | Yes |
+
+```typescript
+// 99.co - works without browser
+fetch(url, { headers: { "Accept": "application/json" } })
+```
+
+**Key insight**: Fewer headers = bypass. Adding User-Agent triggers Cloudflare block.
+
+## When to Use Browser
 
 Use browser navigation when:
 - Direct fetch returns 403 (Cloudflare blocking)
