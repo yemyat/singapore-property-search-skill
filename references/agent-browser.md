@@ -5,7 +5,8 @@ Fallback tool for when direct fetch fails due to Cloudflare protection changes.
 ## Installation
 
 ```bash
-npx add-skill agent-browser
+npm install -g agent-browser
+agent-browser install  # Download Chromium
 ```
 
 Or run `scripts/install-prerequisites.sh`.
@@ -20,6 +21,7 @@ Or run `scripts/install-prerequisites.sh`.
 ## Essential Commands
 
 ### Navigation
+
 ```bash
 agent-browser open <url>      # Navigate to URL
 agent-browser back            # Go back
@@ -28,6 +30,7 @@ agent-browser close           # Close browser
 ```
 
 ### Snapshot (page analysis)
+
 ```bash
 agent-browser snapshot        # Full accessibility tree
 agent-browser snapshot -i     # Interactive elements only (recommended)
@@ -35,6 +38,7 @@ agent-browser snapshot -c     # Compact output
 ```
 
 ### Interactions (use @refs from snapshot)
+
 ```bash
 agent-browser click @e1           # Click element
 agent-browser fill @e2 "text"     # Clear and type in input
@@ -45,6 +49,7 @@ agent-browser scroll down 500     # Scroll page
 ```
 
 ### Get Information
+
 ```bash
 agent-browser get text @e1        # Get element text
 agent-browser get value @e1       # Get input value
@@ -52,6 +57,7 @@ agent-browser get url             # Get current URL
 ```
 
 ### Execute JavaScript
+
 ```bash
 agent-browser eval "return document.title"
 agent-browser eval "
@@ -61,6 +67,7 @@ agent-browser eval "
 ```
 
 ### Screenshots
+
 ```bash
 agent-browser screenshot          # Screenshot to stdout
 agent-browser screenshot path.png # Save to file
@@ -68,6 +75,7 @@ agent-browser screenshot --full   # Full page
 ```
 
 ### Wait
+
 ```bash
 agent-browser wait @e1                # Wait for element
 agent-browser wait 2000               # Wait milliseconds
