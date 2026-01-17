@@ -14,15 +14,19 @@ else
     echo "✓ Bun installed"
 fi
 
-# Check and install agent-browser skill
-AGENT_BROWSER_PATH="$HOME/.factory/skills/agent-browser"
-if [ -d "$AGENT_BROWSER_PATH" ]; then
-    echo "✓ agent-browser skill is already installed"
+# Check and install agent-browser
+if command -v agent-browser &> /dev/null; then
+    echo "✓ agent-browser is already installed"
 else
-    echo "Installing agent-browser skill..."
-    npx add-skill agent-browser
-    echo "✓ agent-browser skill installed"
+    echo "Installing agent-browser..."
+    npm install -g agent-browser
+    echo "✓ agent-browser installed"
 fi
+
+# Install Chromium for agent-browser
+echo "Ensuring Chromium is installed for agent-browser..."
+agent-browser install
+echo "✓ Chromium ready"
 
 echo ""
 echo "All prerequisites installed!"
